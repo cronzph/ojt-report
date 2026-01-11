@@ -1,0 +1,1 @@
+This repository contains my On-the-Job Training (OJT) Accomplishment Report, documenting the tasks, skills, and experiences I gained during my training period. It serves as both a record of my progress and a portfolio of the technical and professional competencies I developed.
