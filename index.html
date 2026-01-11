@@ -1,0 +1,270 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>OJT Accomplishment Reports</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 40px 20px;
+            color: #333;
+        }
+
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+            animation: fadeIn 0.8s ease-out;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .main-header {
+            text-align: center;
+            color: white;
+            margin-bottom: 60px;
+        }
+
+        .main-header h1 {
+            font-size: 3em;
+            font-weight: 700;
+            margin-bottom: 15px;
+            text-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+            animation: slideDown 0.8s ease-out;
+        }
+
+        @keyframes slideDown {
+            from {
+                opacity: 0;
+                transform: translateY(-30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .main-header p {
+            font-size: 1.3em;
+            opacity: 0.95;
+        }
+
+        .weeks-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 30px;
+            margin-bottom: 40px;
+        }
+
+        .week-card {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            padding: 40px 30px;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.2);
+            position: relative;
+            overflow: hidden;
+            opacity: 0;
+            animation: cardAppear 0.6s ease-out forwards;
+            text-decoration: none;
+            display: block;
+        }
+
+        .week-card:nth-child(1) { animation-delay: 0.1s; }
+        .week-card:nth-child(2) { animation-delay: 0.2s; }
+        .week-card:nth-child(3) { animation-delay: 0.3s; }
+        .week-card:nth-child(4) { animation-delay: 0.4s; }
+
+        @keyframes cardAppear {
+            from {
+                opacity: 0;
+                transform: scale(0.8) translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: scale(1) translateY(0);
+            }
+        }
+
+        .week-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            opacity: 0;
+            transition: opacity 0.4s ease;
+            z-index: 0;
+        }
+
+        .week-card:hover {
+            transform: translateY(-15px) scale(1.05);
+            box-shadow: 0 20px 60px rgba(102, 126, 234, 0.4);
+        }
+
+        .week-card:hover::before {
+            opacity: 1;
+        }
+
+        .week-card-content {
+            position: relative;
+            z-index: 1;
+            transition: color 0.4s ease;
+        }
+
+        .week-card:hover .week-card-content {
+            color: white;
+        }
+
+        .week-icon {
+            font-size: 3.5em;
+            margin-bottom: 20px;
+            transition: transform 0.4s ease;
+        }
+
+        .week-card:hover .week-icon {
+            transform: scale(1.2) rotate(5deg);
+        }
+
+        .week-number {
+            font-size: 2em;
+            font-weight: 700;
+            margin-bottom: 10px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            transition: all 0.4s ease;
+        }
+
+        .week-card:hover .week-number {
+            -webkit-text-fill-color: white;
+        }
+
+        .week-status {
+            font-size: 0.95em;
+            color: #666;
+            margin-top: 10px;
+            transition: color 0.4s ease;
+        }
+
+        .week-card:hover .week-status {
+            color: rgba(255, 255, 255, 0.9);
+        }
+
+        .status-badge {
+            display: inline-block;
+            padding: 6px 16px;
+            border-radius: 20px;
+            font-size: 0.85em;
+            font-weight: 600;
+            margin-top: 15px;
+        }
+
+        .completed {
+            background: #10b981;
+            color: white;
+        }
+
+        .upcoming {
+            background: #f59e0b;
+            color: white;
+        }
+
+        .footer {
+            text-align: center;
+            color: white;
+            margin-top: 60px;
+            opacity: 0.9;
+        }
+
+        .footer p {
+            font-size: 1em;
+            margin-bottom: 10px;
+        }
+
+        @media (max-width: 768px) {
+            .main-header h1 {
+                font-size: 2.2em;
+            }
+
+            .weeks-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="main-header">
+            <h1>📋 OJT ACCOMPLISHMENT REPORTS</h1>
+            <p>On-The-Job Training Documentation</p>
+        </div>
+
+        <div class="weeks-grid">
+            <a href="weeks\week1.html" class="week-card">
+                <div class="week-card-content">
+                    <div class="week-icon">📅</div>
+                    <div class="week-number">WEEK 1</div>
+                    <div class="week-status">January 5-9, 2026</div>
+                    <span class="status-badge completed">Completed</span>
+                </div>
+            </a>
+
+            <a href="upcoming.html" class="week-card">
+                <div class="week-card-content">
+                    <div class="week-icon">📅</div>
+                    <div class="week-number">WEEK 2</div>
+                    <div class="week-status">January 12-16, 2026</div>
+                    <span class="status-badge upcoming">Upcoming</span>
+                </div>
+            </a>
+
+            <a href="upcoming.html" class="week-card">
+                <div class="week-card-content">
+                    <div class="week-icon">📅</div>
+                    <div class="week-number">WEEK 3</div>
+                    <div class="week-status">January 19-23, 2026</div>
+                    <span class="status-badge upcoming">Upcoming</span>
+                </div>
+            </a>
+
+            <a href="upcoming.html" class="week-card">
+                <div class="week-card-content">
+                    <div class="week-icon">📅</div>
+                    <div class="week-number">WEEK 4</div>
+                    <div class="week-status">January 26-30, 2026</div>
+                    <span class="status-badge upcoming">Upcoming</span>
+                </div>
+            </a>
+        </div>
+
+        <div class="footer">
+            <p>Click on any week to view detailed accomplishment report</p>
+            <p>© 2026 OJT Portfolio</p>
+        </div>
+    </div>
+</body>
+</html>
