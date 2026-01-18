@@ -39,7 +39,7 @@
         .main-header {
             text-align: center;
             color: white;
-            margin-bottom: 60px;
+            margin-bottom: 40px;
         }
 
         .main-header h1 {
@@ -64,6 +64,93 @@
         .main-header p {
             font-size: 1.3em;
             opacity: 0.95;
+        }
+
+        .hours-tracker {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            padding: 30px;
+            margin-bottom: 40px;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.2);
+            animation: cardAppear 0.6s ease-out;
+        }
+
+        @keyframes cardAppear {
+            from {
+                opacity: 0;
+                transform: scale(0.9) translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: scale(1) translateY(0);
+            }
+        }
+
+        .hours-content {
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 30px;
+        }
+
+        .hours-item {
+            text-align: center;
+            flex: 1;
+            min-width: 150px;
+        }
+
+        .hours-label {
+            font-size: 0.9em;
+            color: #666;
+            margin-bottom: 10px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .hours-value {
+            font-size: 3em;
+            font-weight: 700;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .hours-unit {
+            font-size: 0.4em;
+            color: #888;
+        }
+
+        .progress-bar-container {
+            margin-top: 20px;
+            width: 100%;
+        }
+
+        .progress-bar {
+            width: 100%;
+            height: 20px;
+            background: #e0e0e0;
+            border-radius: 10px;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .progress-fill {
+            height: 100%;
+            background: linear-gradient(90deg, #667eea 0%, #764ba2 100%);
+            transition: width 1s ease-out;
+            display: flex;
+            align-items: center;
+            justify-content: flex-end;
+            padding-right: 10px;
+        }
+
+        .progress-text {
+            color: white;
+            font-size: 0.75em;
+            font-weight: 600;
         }
 
         .weeks-grid {
@@ -94,17 +181,11 @@
         .week-card:nth-child(2) { animation-delay: 0.2s; }
         .week-card:nth-child(3) { animation-delay: 0.3s; }
         .week-card:nth-child(4) { animation-delay: 0.4s; }
-
-        @keyframes cardAppear {
-            from {
-                opacity: 0;
-                transform: scale(0.8) translateY(30px);
-            }
-            to {
-                opacity: 1;
-                transform: scale(1) translateY(0);
-            }
-        }
+        .week-card:nth-child(5) { animation-delay: 0.5s; }
+        .week-card:nth-child(6) { animation-delay: 0.6s; }
+        .week-card:nth-child(7) { animation-delay: 0.7s; }
+        .week-card:nth-child(8) { animation-delay: 0.8s; }
+        .week-card:nth-child(9) { animation-delay: 0.9s; }
 
         .week-card::before {
             content: '';
@@ -174,6 +255,17 @@
             color: rgba(255, 255, 255, 0.9);
         }
 
+        .week-hours {
+            font-size: 0.85em;
+            color: #888;
+            margin-top: 5px;
+            transition: color 0.4s ease;
+        }
+
+        .week-card:hover .week-hours {
+            color: rgba(255, 255, 255, 0.8);
+        }
+
         .status-badge {
             display: inline-block;
             padding: 6px 16px;
@@ -213,6 +305,10 @@
             .weeks-grid {
                 grid-template-columns: 1fr;
             }
+
+            .hours-value {
+                font-size: 2.5em;
+            }
         }
     </style>
 </head>
@@ -223,26 +319,52 @@
             <p>On-The-Job Training Documentation</p>
         </div>
 
+        <div class="hours-tracker">
+            <div class="hours-content">
+                <div class="hours-item">
+                    <div class="hours-label">Hours Rendered</div>
+                    <div class="hours-value" id="renderedHours">0<span class="hours-unit">hrs</span></div>
+                </div>
+                <div class="hours-item">
+                    <div class="hours-label">Required Hours</div>
+                    <div class="hours-value">500<span class="hours-unit">hrs</span></div>
+                </div>
+                <div class="hours-item">
+                    <div class="hours-label">Remaining</div>
+                    <div class="hours-value" id="remainingHours">500<span class="hours-unit">hrs</span></div>
+                </div>
+            </div>
+            <div class="progress-bar-container">
+                <div class="progress-bar">
+                    <div class="progress-fill" id="progressBar" style="width: 0%;">
+                        <span class="progress-text" id="progressText">0%</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
         <div class="weeks-grid">
-            <a href="weeks\week1.html" class="week-card">
+            <a href="weeks/week1.html" class="week-card" data-hours="40">
                 <div class="week-card-content">
                     <div class="week-icon">📋</div>
                     <div class="week-number">WEEK 1</div>
-                    <div class="week-status">January 5-9, 2026</div>
+                    <div class="week-status">January 6-10, 2026</div>
+                    <div class="week-hours">40 hours (5 days × 8hrs)</div>
                     <span class="status-badge completed">Completed</span>
                 </div>
             </a>
 
-            <a href="weeks\week2.html" class="week-card">
+            <a href="weeks/week2.html" class="week-card" data-hours="32">
                 <div class="week-card-content">
                     <div class="week-icon">📋</div>
                     <div class="week-number">WEEK 2</div>
-                    <div class="week-status">January 12,14-16, 2026</div>
+                    <div class="week-status">January 12, 14-16, 2026</div>
+                    <div class="week-hours">32 hours (4 days × 8hrs)</div>
                     <span class="status-badge completed">Completed</span>
                 </div>
             </a>
 
-            <a href="upcoming.html" class="week-card">
+            <a href="upcoming.html" class="week-card" data-hours="0">
                 <div class="week-card-content">
                     <div class="week-icon">📋</div>
                     <div class="week-number">WEEK 3</div>
@@ -251,7 +373,7 @@
                 </div>
             </a>
 
-            <a href="upcoming.html" class="week-card">
+            <a href="upcoming.html" class="week-card" data-hours="0">
                 <div class="week-card-content">
                     <div class="week-icon">📋</div>
                     <div class="week-number">WEEK 4</div>
@@ -260,7 +382,7 @@
                 </div>
             </a>
 
-              <a href="upcoming.html" class="week-card">
+            <a href="upcoming.html" class="week-card" data-hours="0">
                 <div class="week-card-content">
                     <div class="week-icon">📋</div>
                     <div class="week-number">WEEK 5</div>
@@ -269,7 +391,7 @@
                 </div>
             </a>
 
-              <a href="upcoming.html" class="week-card">
+            <a href="upcoming.html" class="week-card" data-hours="0">
                 <div class="week-card-content">
                     <div class="week-icon">📋</div>
                     <div class="week-number">WEEK 6</div>
@@ -278,7 +400,7 @@
                 </div>
             </a>
 
-              <a href="upcoming.html" class="week-card">
+            <a href="upcoming.html" class="week-card" data-hours="0">
                 <div class="week-card-content">
                     <div class="week-icon">📋</div>
                     <div class="week-number">WEEK 7</div>
@@ -287,7 +409,7 @@
                 </div>
             </a>
 
-              <a href="upcoming.html" class="week-card">
+            <a href="upcoming.html" class="week-card" data-hours="0">
                 <div class="week-card-content">
                     <div class="week-icon">📋</div>
                     <div class="week-number">WEEK 8</div>
@@ -296,7 +418,7 @@
                 </div>
             </a>
 
-              <a href="upcoming.html" class="week-card">
+            <a href="upcoming.html" class="week-card" data-hours="0">
                 <div class="week-card-content">
                     <div class="week-icon">📋</div>
                     <div class="week-number">WEEK 9</div>
@@ -311,5 +433,31 @@
             <p>© 2026 OJT Portfolio</p>
         </div>
     </div>
+
+    <script>
+        // Calculate total hours from all week cards
+        function calculateHours() {
+            const weekCards = document.querySelectorAll('.week-card');
+            let totalHours = 0;
+            
+            weekCards.forEach(card => {
+                const hours = parseInt(card.getAttribute('data-hours')) || 0;
+                totalHours += hours;
+            });
+            
+            const requiredHours = 500;
+            const remainingHours = requiredHours - totalHours;
+            const percentage = (totalHours / requiredHours * 100).toFixed(1);
+            
+            // Update the display
+            document.getElementById('renderedHours').innerHTML = totalHours + '<span class="hours-unit">hrs</span>';
+            document.getElementById('remainingHours').innerHTML = remainingHours + '<span class="hours-unit">hrs</span>';
+            document.getElementById('progressBar').style.width = percentage + '%';
+            document.getElementById('progressText').textContent = percentage + '%';
+        }
+        
+        // Calculate on page load
+        calculateHours();
+    </script>
 </body>
 </html>
