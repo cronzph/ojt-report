@@ -1,0 +1,295 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Week 12 - Accomplishment Report</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 40px 20px;
+            color: #333;
+        }
+
+        .back-button {
+            max-width: 900px;
+            margin: 0 auto 20px;
+            animation: fadeIn 0.8s ease-out;
+        }
+
+        .back-btn {
+            background: rgba(255, 255, 255, 0.95);
+            color: #667eea;
+            border: none;
+            padding: 12px 30px;
+            border-radius: 50px;
+            font-size: 1em;
+            font-weight: 600;
+            cursor: pointer;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.2);
+            transition: all 0.3s ease;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            text-decoration: none;
+        }
+
+        .back-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.3);
+            background: white;
+        }
+
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+            overflow: hidden;
+            animation: fadeIn 0.8s ease-out;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 60px 40px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .header::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            right: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(255,255,255,0.1) 0%, transparent 70%);
+            animation: pulse 15s ease-in-out infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { transform: translate(0, 0); }
+            50% { transform: translate(-20px, -20px); }
+        }
+
+        .header h1 {
+            font-size: 2.5em;
+            font-weight: 700;
+            letter-spacing: 1px;
+            position: relative;
+            z-index: 1;
+            margin-bottom: 10px;
+        }
+
+        .header-subtitle {
+            font-size: 1.1em;
+            opacity: 0.9;
+            position: relative;
+            z-index: 1;
+        }
+
+        .content {
+            padding: 50px 40px;
+        }
+
+        .day-card {
+            background: white;
+            border-radius: 15px;
+            padding: 30px;
+            margin-bottom: 25px;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.08);
+            border-left: 5px solid #667eea;
+            transition: all 0.3s ease;
+            opacity: 0;
+            animation: slideIn 0.6s ease-out forwards;
+        }
+
+        .day-card:nth-child(1) { animation-delay: 0.1s; }
+        .day-card:nth-child(2) { animation-delay: 0.2s; }
+        .day-card:nth-child(3) { animation-delay: 0.3s; }
+        .day-card:nth-child(4) { animation-delay: 0.4s; }
+        .day-card:nth-child(5) { animation-delay: 0.5s; }
+        .day-card:nth-child(6) { animation-delay: 0.6s; }
+
+        @keyframes slideIn {
+            from { opacity: 0; transform: translateX(-30px); }
+            to { opacity: 1; transform: translateX(0); }
+        }
+
+        .day-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(102, 126, 234, 0.2);
+        }
+
+        .day-header {
+            display: flex;
+            align-items: center;
+            margin-bottom: 15px;
+        }
+
+        .day-number {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            width: 50px;
+            height: 50px;
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            font-size: 1.2em;
+            margin-right: 15px;
+            box-shadow: 0 4px 10px rgba(102, 126, 234, 0.3);
+            flex-shrink: 0;
+        }
+
+        .day-title {
+            font-size: 1.5em;
+            font-weight: 600;
+            color: #667eea;
+        }
+
+        .day-date {
+            font-size: 0.85em;
+            color: #999;
+            margin-left: auto;
+            font-weight: 500;
+        }
+
+        .day-content {
+            color: #555;
+            line-height: 1.8;
+            font-size: 1.05em;
+        }
+
+        .learning-badge {
+            display: inline-block;
+            margin-top: 12px;
+            padding: 5px 14px;
+            background: linear-gradient(135deg, #667eea22, #764ba222);
+            border: 1px solid #667eea44;
+            border-radius: 20px;
+            font-size: 0.82em;
+            color: #667eea;
+            font-weight: 600;
+        }
+
+        .footer {
+            background: #f8f9fa;
+            padding: 30px 40px;
+            text-align: center;
+            color: #666;
+            font-size: 0.95em;
+        }
+
+        @media (max-width: 768px) {
+            .header { padding: 40px 30px; }
+            .header h1 { font-size: 2em; }
+            .content { padding: 30px 25px; }
+            .day-card { padding: 25px; }
+            .day-title { font-size: 1.3em; }
+            .day-date { display: none; }
+        }
+    </style>
+</head>
+<body>
+    <div class="back-button">
+        <a href="../index.html" class="back-btn">
+            <span>←</span> Back
+        </a>
+    </div>
+
+    <div class="container">
+        <div class="header">
+            <h1>ACCOMPLISHMENT REPORT</h1>
+            <div class="header-subtitle">ON THE JOB TRAINING</div>
+            <div class="header-subtitle">WEEK 12 • March 23–27, 2026</div>
+        </div>
+
+        <div class="content">
+
+            <div class="day-card">
+                <div class="day-header">
+                    <div class="day-number">1</div>
+                    <div class="day-title">Online System Testing</div>
+                    <div class="day-date">March 23, 2026</div>
+                </div>
+                <div class="day-content">
+                    On the first day of the twelfth week, I conducted comprehensive online system testing to evaluate the functionality and performance of the organization's applications. This involved executing test cases, monitoring system responses, and documenting any anomalies or performance issues encountered. The activity strengthened my quality assurance skills and emphasized the critical role of thorough testing in ensuring reliable and efficient system operations.
+                    <br><span class="learning-badge">🎯 System Testing</span>
+                </div>
+            </div>
+
+            <div class="day-card">
+                <div class="day-header">
+                    <div class="day-number">2</div>
+                    <div class="day-title">Online Data Backup</div>
+                    <div class="day-date">March 24, 2026</div>
+                </div>
+                <div class="day-content">
+                    On the second day, I performed online data backup procedures to safeguard critical organizational information. This task involved configuring backup schedules, verifying data integrity, and ensuring that all essential files were properly archived in secure storage locations. The experience reinforced my understanding of data protection strategies and the importance of regular backups in preventing data loss and maintaining business continuity.
+                    <br><span class="learning-badge">🎯 Data Planning</span>
+                </div>
+            </div>
+
+            <div class="day-card">
+                <div class="day-header">
+                    <div class="day-number">3</div>
+                    <div class="day-title">Online Inventory Checking</div>
+                    <div class="day-date">March 25, 2026</div>
+                </div>
+                <div class="day-content">
+                    On the third day, I conducted online inventory checking to verify and update the organization's asset records. This involved cross-referencing digital inventory databases with actual hardware and software assets, identifying discrepancies, and updating documentation accordingly. The task provided practical experience in inventory management and highlighted the importance of accurate record-keeping for effective IT resource allocation and planning.
+                    <br><span class="learning-badge">🎯 Inventory Management</span>
+                </div>
+            </div>
+
+            <div class="day-card">
+                <div class="day-header">
+                    <div class="day-number">4</div>
+                    <div class="day-title">Online Review of System Errors</div>
+                    <div class="day-date">March 26, 2026</div>
+                </div>
+                <div class="day-content">
+                    On the fourth day, I performed an online review of system errors to identify and address recurring issues affecting system performance. This involved analyzing error logs, categorizing issues by severity, and proposing solutions to resolve the most critical problems. The activity enhanced my debugging capabilities and demonstrated the value of proactive error management in maintaining system stability and user satisfaction.
+                    <br><span class="learning-badge">🎯 Bug Fixing</span>
+                </div>
+            </div>
+
+            <div class="day-card">
+                <div class="day-header">
+                    <div class="day-number">5</div>
+                    <div class="day-title">Online System Monitoring</div>
+                    <div class="day-date">March 27, 2026</div>
+                </div>
+                <div class="day-content">
+                    On the fifth day, I engaged in online system monitoring to track the health and performance of the organization's IT infrastructure. This involved using monitoring tools to observe system metrics, identify potential bottlenecks, and ensure optimal resource utilization. The experience deepened my understanding of system administration and the importance of continuous monitoring in preventing issues before they impact end users.
+                    <br><span class="learning-badge">🎯 Understanding of System</span>
+                </div>
+            </div>
+
+        </div>
+
+        <div class="footer">
+            OJT Accomplishment Report • Week 12
+        </div>
+    </div>
+</body>
+</html>

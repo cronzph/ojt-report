@@ -1,0 +1,295 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Week 11 - Accomplishment Report</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 40px 20px;
+            color: #333;
+        }
+
+        .back-button {
+            max-width: 900px;
+            margin: 0 auto 20px;
+            animation: fadeIn 0.8s ease-out;
+        }
+
+        .back-btn {
+            background: rgba(255, 255, 255, 0.95);
+            color: #667eea;
+            border: none;
+            padding: 12px 30px;
+            border-radius: 50px;
+            font-size: 1em;
+            font-weight: 600;
+            cursor: pointer;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.2);
+            transition: all 0.3s ease;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            text-decoration: none;
+        }
+
+        .back-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.3);
+            background: white;
+        }
+
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+            overflow: hidden;
+            animation: fadeIn 0.8s ease-out;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 60px 40px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .header::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            right: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(255,255,255,0.1) 0%, transparent 70%);
+            animation: pulse 15s ease-in-out infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { transform: translate(0, 0); }
+            50% { transform: translate(-20px, -20px); }
+        }
+
+        .header h1 {
+            font-size: 2.5em;
+            font-weight: 700;
+            letter-spacing: 1px;
+            position: relative;
+            z-index: 1;
+            margin-bottom: 10px;
+        }
+
+        .header-subtitle {
+            font-size: 1.1em;
+            opacity: 0.9;
+            position: relative;
+            z-index: 1;
+        }
+
+        .content {
+            padding: 50px 40px;
+        }
+
+        .day-card {
+            background: white;
+            border-radius: 15px;
+            padding: 30px;
+            margin-bottom: 25px;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.08);
+            border-left: 5px solid #667eea;
+            transition: all 0.3s ease;
+            opacity: 0;
+            animation: slideIn 0.6s ease-out forwards;
+        }
+
+        .day-card:nth-child(1) { animation-delay: 0.1s; }
+        .day-card:nth-child(2) { animation-delay: 0.2s; }
+        .day-card:nth-child(3) { animation-delay: 0.3s; }
+        .day-card:nth-child(4) { animation-delay: 0.4s; }
+        .day-card:nth-child(5) { animation-delay: 0.5s; }
+        .day-card:nth-child(6) { animation-delay: 0.6s; }
+
+        @keyframes slideIn {
+            from { opacity: 0; transform: translateX(-30px); }
+            to { opacity: 1; transform: translateX(0); }
+        }
+
+        .day-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(102, 126, 234, 0.2);
+        }
+
+        .day-header {
+            display: flex;
+            align-items: center;
+            margin-bottom: 15px;
+        }
+
+        .day-number {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            width: 50px;
+            height: 50px;
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            font-size: 1.2em;
+            margin-right: 15px;
+            box-shadow: 0 4px 10px rgba(102, 126, 234, 0.3);
+            flex-shrink: 0;
+        }
+
+        .day-title {
+            font-size: 1.5em;
+            font-weight: 600;
+            color: #667eea;
+        }
+
+        .day-date {
+            font-size: 0.85em;
+            color: #999;
+            margin-left: auto;
+            font-weight: 500;
+        }
+
+        .day-content {
+            color: #555;
+            line-height: 1.8;
+            font-size: 1.05em;
+        }
+
+        .learning-badge {
+            display: inline-block;
+            margin-top: 12px;
+            padding: 5px 14px;
+            background: linear-gradient(135deg, #667eea22, #764ba222);
+            border: 1px solid #667eea44;
+            border-radius: 20px;
+            font-size: 0.82em;
+            color: #667eea;
+            font-weight: 600;
+        }
+
+        .footer {
+            background: #f8f9fa;
+            padding: 30px 40px;
+            text-align: center;
+            color: #666;
+            font-size: 0.95em;
+        }
+
+        @media (max-width: 768px) {
+            .header { padding: 40px 30px; }
+            .header h1 { font-size: 2em; }
+            .content { padding: 30px 25px; }
+            .day-card { padding: 25px; }
+            .day-title { font-size: 1.3em; }
+            .day-date { display: none; }
+        }
+    </style>
+</head>
+<body>
+    <div class="back-button">
+        <a href="../index.html" class="back-btn">
+            <span>←</span> Back
+        </a>
+    </div>
+
+    <div class="container">
+        <div class="header">
+            <h1>ACCOMPLISHMENT REPORT</h1>
+            <div class="header-subtitle">ON THE JOB TRAINING</div>
+            <div class="header-subtitle">WEEK 11 • March 16–20, 2026</div>
+        </div>
+
+        <div class="content">
+
+            <div class="day-card">
+                <div class="day-header">
+                    <div class="day-number">1</div>
+                    <div class="day-title">System Review, Check Errors and Improvements</div>
+                    <div class="day-date">March 16, 2026</div>
+                </div>
+                <div class="day-content">
+                    On the first day of the eleventh week, I performed a comprehensive review of the system to identify errors and potential areas for improvement. This involved examining system logs, testing various functionalities, and documenting any issues or inefficiencies discovered during the process. The activity enhanced my ability to critically evaluate system performance and recognize opportunities for optimization in a real-world IT environment.
+                    <br><span class="learning-badge">🎯 Understanding of System</span>
+                </div>
+            </div>
+
+            <div class="day-card">
+                <div class="day-header">
+                    <div class="day-number">2</div>
+                    <div class="day-title">School PowerPoint Presentation</div>
+                    <div class="day-date">March 17, 2026</div>
+                </div>
+                <div class="day-content">
+                    On the second day, I created a PowerPoint presentation for a school-related task. This involved organizing content, designing slides with appropriate visuals, and structuring the presentation to effectively communicate key information. The task developed my presentation skills and reinforced the importance of clear visual communication in conveying technical concepts to different audiences.
+                    <br><span class="learning-badge">🎯 Presentation Skill</span>
+                </div>
+            </div>
+
+            <div class="day-card">
+                <div class="day-header">
+                    <div class="day-number">3</div>
+                    <div class="day-title">Checking Inventory</div>
+                    <div class="day-date">March 18, 2026</div>
+                </div>
+                <div class="day-content">
+                    On the third day, I assisted in checking and updating the organization's inventory records. This task required verifying the presence and condition of hardware components, software licenses, and other IT assets against existing documentation. The activity provided practical experience in inventory management and highlighted the importance of accurate asset tracking for effective resource planning and budgeting.
+                    <br><span class="learning-badge">🎯 Inventory Management</span>
+                </div>
+            </div>
+
+            <div class="day-card">
+                <div class="day-header">
+                    <div class="day-number">4</div>
+                    <div class="day-title">Online Computer Management</div>
+                    <div class="day-date">March 19, 2026</div>
+                </div>
+                <div class="day-content">
+                    On the fourth day, I engaged in online computer management tasks to oversee and maintain systems remotely. This involved using remote management tools to monitor system health, apply updates, and troubleshoot issues without physical access to the machines. The experience expanded my knowledge of Computer Information Management (CIM) and demonstrated the efficiency of remote administration in modern IT operations.
+                    <br><span class="learning-badge">🎯 CIM Management</span>
+                </div>
+            </div>
+
+            <div class="day-card">
+                <div class="day-header">
+                    <div class="day-number">5</div>
+                    <div class="day-title">Online Research for System</div>
+                    <div class="day-date">March 20, 2026</div>
+                </div>
+                <div class="day-content">
+                    On the fifth day, I conducted online research to gather information and insights relevant to the organization's system needs. This involved exploring technical resources, reviewing case studies, and analyzing best practices from industry experts. The research activity strengthened my analytical skills and provided valuable knowledge that can be applied to improve system design and implementation strategies.
+                    <br><span class="learning-badge">🎯 Analysis</span>
+                </div>
+            </div>
+
+        </div>
+
+        <div class="footer">
+            OJT Accomplishment Report • Week 11
+        </div>
+    </div>
+</body>
+</html>
