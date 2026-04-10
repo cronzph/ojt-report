@@ -131,6 +131,8 @@
         .day-card:nth-child(2) { animation-delay: 0.2s; }
         .day-card:nth-child(3) { animation-delay: 0.3s; }
         .day-card:nth-child(4) { animation-delay: 0.4s; }
+        .day-card:nth-child(5) { animation-delay: 0.5s; }
+        .day-card:nth-child(6) { animation-delay: 0.6s; }
 
         @keyframes slideIn {
             from {
@@ -167,6 +169,14 @@
             font-size: 1.2em;
             margin-right: 15px;
             box-shadow: 0 4px 10px rgba(102, 126, 234, 0.3);
+            flex-shrink: 0;
+        }
+
+        .day-date {
+            font-size: 0.85em;
+            color: #999;
+            margin-left: auto;
+            font-weight: 500;
         }
 
         .day-title {
@@ -179,6 +189,18 @@
             color: #555;
             line-height: 1.8;
             font-size: 1.05em;
+        }
+
+        .learning-badge {
+            display: inline-block;
+            margin-top: 12px;
+            padding: 5px 14px;
+            background: linear-gradient(135deg, #667eea22, #764ba222);
+            border: 1px solid #667eea44;
+            border-radius: 20px;
+            font-size: 0.82em;
+            color: #667eea;
+            font-weight: 600;
         }
 
         .footer {
@@ -231,9 +253,11 @@
                 <div class="day-header">
                     <div class="day-number">1</div>
                     <div class="day-title">Logo & Banner Design</div>
+                    <div class="day-date">January 12, 2026</div>
                 </div>
                 <div class="day-content">
                     On the first day of the second week, I created a logo and banner design. This task required creativity and attention to detail, ensuring that the outputs were visually appealing and aligned with the organization's standards. The completed designs are now available for use in presentations and official materials.
+                    <br><span class="learning-badge">🎯 Design</span>
                 </div>
             </div>
 
@@ -241,9 +265,11 @@
                 <div class="day-header">
                     <div class="day-number">2</div>
                     <div class="day-title">Photo Session Assistance</div>
+                    <div class="day-date">January 14, 2026</div>
                 </div>
                 <div class="day-content">
                     On the second day, I assisted my colleague during a photo session. I helped organize the setup, supported in capturing images, and ensured that the process ran smoothly. My role as an assistant contributed to a more efficient and collaborative workflow.
+                    <br><span class="learning-badge">🎯 Photography</span>
                 </div>
             </div>
 
@@ -251,9 +277,11 @@
                 <div class="day-header">
                     <div class="day-number">3</div>
                     <div class="day-title">Photo Editing</div>
+                    <div class="day-date">January 15, 2026</div>
                 </div>
                 <div class="day-content">
                     On the third day, we edited the photos taken during the previous session. I participated in reviewing the shots, adjusting lighting and colors, and refining the overall presentation. This editing process enhanced the quality of the images, making them suitable for documentation and official use.
+                    <br><span class="learning-badge">🎯 Photo Editing</span>
                 </div>
             </div>
 
@@ -261,9 +289,11 @@
                 <div class="day-header">
                     <div class="day-number">4</div>
                     <div class="day-title">File Transfer & PC Formatting</div>
+                    <div class="day-date">January 16, 2026</div>
                 </div>
                 <div class="day-content">
                     On the fourth day, we performed file transfers and formatted a PC. We explored different methods of transferring files since the available USB storage was insufficient. Through trial and error, we identified practical approaches to manage the data effectively. This task improved our problem-solving skills and ensured that the PC was properly formatted and ready for use.
+                    <br><span class="learning-badge">🎯 PC Maintenance</span>
                 </div>
             </div>
         </div>
